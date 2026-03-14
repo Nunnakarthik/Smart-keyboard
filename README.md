@@ -8,7 +8,7 @@ TribalType is a high-performance, aesthetically pleasing script workspace design
 
 - **🌐 Multi-Language Support**: Seamlessly switch between Santali and Manipuri.
 - **⌨️ Advanced Phonetic Typing**: Type in English and watch it transform into native scripts in real-time.
-- **🤖 Live Sentence Translation**: Translate full English sentences directly into tribal scripts via a custom backend.
+- **🤖 Bidirectional Translation**: Automatically detects input language. Translate English → Tribal or Tribal → English with a single click.
 - **🎙️ Voice Dictation**: Integrated Web Speech API for hands-free typing in tribal scripts.
 - **✨ Predictive Suggestions**: Real-time word suggestions to speed up your workflow.
 - **🌓 Premium Themes**: 
