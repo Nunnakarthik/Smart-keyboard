@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-studio-bg: #f8fafc;
+  --color-studio-text: #0f172a;
+  --color-studio-primary: #6366f1;
+  --color-studio-primary-hover: #4f46e5;
+  --color-studio-surface: #ffffff;
+  --color-studio-border: #e2e8f0;
+
+  --color-midnight-bg: #020617;
+  --color-midnight-text: #f8fafc;
+  --color-midnight-surface: #0f172a;
+  --color-midnight-border: #1e293b;
+}
+
+body {
+  background-color: var(--color-studio-bg);
+  color: var(--color-studio-text);
+  margin: 0;
+  font-family: 'Inter', 'Outfit', sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.studio-card {
+  background: var(--color-studio-surface);
+  border: 1px solid var(--color-studio-border);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.midnight-card {
+  background: var(--color-midnight-surface);
+  border: 1px solid var(--color-midnight-border);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+.key-studio {
+  background: var(--color-studio-surface);
+  color: var(--color-studio-text);
+  border: 1px solid var(--color-studio-border);
+  box-shadow: 0 2px 0 0 var(--color-studio-border);
+  transition: all 0.1s ease;
+  font-weight: 600;
+}
+
+.key-studio:hover {
+  background: #f1f5f9;
+}
+
+.suggestion-pill {
+  background: var(--color-studio-primary);
+  color: white;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+.suggestion-pill:hover {
+  background: var(--color-studio-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.key-studio:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 transparent;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
