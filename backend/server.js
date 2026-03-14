@@ -16,10 +16,26 @@ app.post('/api/translate', async (req, res) => {
   }
 
   try {
-    // Map our app's languages to Google Translate codes
-    const targetLangCode = lang === 'Santali' ? 'sat' : 'mni-Mtei';
+    // Detect if text contains tribal scripts
+    const isSantaliScript = /[\u1C50-\u1C7F]/.test(text);
+    const isManipuriScript = /[\uABC0-\uABFF\uAAE0-\uAAFF]/.test(text);
     
-    const result = await translate(text, { to: targetLangCode });
+    let sourceLangCode, targetLangCode;
+    
+    // If we detect tribal script characters, assume Tribal -> English
+    if (isSantaliScript || isManipuriScript) {
+      sourceLangCode = isSantaliScript ? 'sat' : 'mni-Mtei';
+      targetLangCode = 'en';
+    } else {
+      // Otherwise assume English -> Selected Tribal Language
+      sourceLangCode = 'en';
+      targetLangCode = lang === 'Santali' ? 'sat' : 'mni-Mtei';
+    }
+    
+    const result = await translate(text, { 
+      from: sourceLangCode,
+      to: targetLangCode 
+    });
     // Sanitize: collapse all whitespace/newlines the API smuggles into the result
     const cleanText = (result.text || '').replace(/\s+/g, ' ').trim();
     
@@ -28,6 +44,10 @@ app.post('/api/translate', async (req, res) => {
     console.error('Translation Error:', error);
     res.status(500).json({ error: 'Failed to translate' });
   }
+});
+
+app.get('/', (req, res) => {
+  res.send('<h1>Smart Keyboard Backend is running!</h1><p>Check <a href="/health">/health</a> for server status.</p>');
 });
 
 app.get('/health', (req, res) => {

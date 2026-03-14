@@ -23,7 +23,10 @@ function App() {
       const response = await fetch(`${apiUrl}/api/translate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), lang: currentLang })
+        body: JSON.stringify({ 
+          text: text.trim(), 
+          lang: currentLang
+        })
       });
       const data = await response.json();
       if (data.translatedText) {
@@ -163,13 +166,13 @@ function App() {
                 }
               }}
               onKeyDown={(e) => {
-                // In TRANSLATE mode: press Enter to translate the typed English sentence
+                // In TRANSLATE mode: press Enter to translate the typed sentence
                 if (typingMode === 'translate' && e.key === 'Enter') {
                   e.preventDefault();
                   translateSentence(inputText);
                 }
               }}
-              placeholder={typingMode === 'translate' ? `Type English sentence, then press Enter to translate...` : `Scribe starts here...`}
+              placeholder={typingMode === 'translate' ? `Type English or ${currentLang} script, then press Enter...` : `Scribe starts here...`}
               className={`w-full h-40 p-6 text-2xl bg-transparent focus:ring-0 outline-none resize-none placeholder:text-slate-300 dark:placeholder:text-slate-700 leading-relaxed transition-all ${isTranslating ? 'opacity-50' : ''}`}
             />
             <div className="absolute top-2 right-2 flex gap-1">
@@ -258,7 +261,10 @@ function App() {
                 )}
                 {isTranslating ? 'Translating...' : 'Translate  (or press Enter)'}
               </button>
-              <span className="text-[10px] text-slate-400 font-semibold">Type English → get {currentLang} script</span>
+
+              <span className="text-[10px] text-slate-400 font-semibold">
+                Bidirectional: Syncs automatically between English and {currentLang}
+              </span>
             </div>
           )}
 
