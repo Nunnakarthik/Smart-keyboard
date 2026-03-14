@@ -19,7 +19,10 @@ function App() {
     if (!text.trim()) return;
     setIsTranslating(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || '';
+      let apiUrl = import.meta.env.VITE_API_URL || '';
+      // Remove trailing slash if present to avoid double slashes
+      if (apiUrl.endsWith('/')) apiUrl = apiUrl.slice(0, -1);
+      
       const response = await fetch(`${apiUrl}/api/translate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
